@@ -1,0 +1,5 @@
+FROM openjdk:latest
+
+ADD target/scala-2.13/iceo-case-study-assembly-1.0.0.jar ./
+
+CMD java -cp iceo-case-study-assembly-1.0.0.jar pl.kacske.RabbitWebSocketService
