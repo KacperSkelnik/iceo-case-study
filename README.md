@@ -5,12 +5,12 @@
 This project contains:
 - RabbitMQ producer that load csv file into fs2 stream and split it into separate streams base on result of modulo operation.
 Numbers form that stream are then summed and publish to the right rabbitmq queue.
-```aidl
+```plain
 <one of file values> % <modulo divider from config> --> stream of numbers with the same result 
 ``` 
 
 - Websocket api that allow connect to one of the queues.
-```aidl
+```plain
 ws://localhost:8080/ws?number=2
 ```
 
