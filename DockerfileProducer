@@ -1,8 +1,5 @@
 FROM openjdk:latest
 
-RUN echo "The ENV variable value is $MODULO_DIVIDER"
-RUN echo "The ENV variable value is $FILE_PATH"
-
 ADD target/scala-2.13/iceo-case-study-assembly-1.0.0.jar ./
 ADD $FILE_PATH ./
 

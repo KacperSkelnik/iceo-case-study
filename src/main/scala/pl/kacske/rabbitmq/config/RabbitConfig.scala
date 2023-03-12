@@ -13,13 +13,13 @@ object RabbitConfig {
     (
       env("RABBIT_HOST").default("localhost").as[String],
       env("RABBIT_USERNAME").default("guest").as[String],
-      env("RABBIT_PASSWORD").default("guest").as[String]
+      env("RABBIT_PASSWORD").default("guest").as[String].secret
     ).parMapN((host, username, password) =>
       Fs2RabbitConfig(
         virtualHost = "/",
         nodes = NonEmptyList.one(Fs2RabbitNodeConfig(host = host, port = 5672)),
         username = Some(username),
-        password = Some(password),
+        password = Some(password.value),
         ssl = false,
         connectionTimeout = 3.seconds,
         requeueOnNack = false,
