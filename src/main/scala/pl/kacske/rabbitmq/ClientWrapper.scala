@@ -51,7 +51,7 @@ object ClientWrapper {
     def consumerPipe(queueName: QueueName): F[Pipe[F, String, String]] =
       for {
         outQueue <- Queue.unbounded[F, Option[String]]
-        outStream = Stream.fromQueueNoneTerminated(outQueue)
+        outStream = Stream.fromQueueUnterminated(outQueue)
         _ <- client
           .createChannel(rabbitConnection)
           .use { implicit channel =>
@@ -65,7 +65,7 @@ object ClientWrapper {
             } yield ()
           }
           .start
-      } yield (_: fs2.Stream[F, String]) => outStream
+      } yield (_: fs2.Stream[F, String]) => outStream.unNone
 
   }
 }

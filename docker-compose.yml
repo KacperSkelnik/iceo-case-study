@@ -21,9 +21,10 @@ services:
 
   producer:
     build:
-      dockerfile: DockerfileProducer
+      dockerfile: Dockerfile
     container_name: 'producer'
     environment:
+      - MAIN_CLASS=pl.kacske.RabbitProducer
       - FILE_PATH=test.csv
       - MODULO_DIVIDER=5
       - RABBIT_HOST=rabbitmq
@@ -38,9 +39,10 @@ services:
 
   consumer:
     build:
-      dockerfile: DockerfileConsumer
+      dockerfile: Dockerfile
     container_name: 'consumer'
     environment:
+      - MAIN_CLASS=pl.kacske.RabbitWebSocketService
       - RABBIT_HOST=rabbitmq
       - RABBIT_USERNAME=guest
       - RABBIT_PASSWORD=guest
